@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    develop:
+      # Create a `watch` configuration to update the app
+      #
+      watch:
+        # Sync the working directory with the `/app` directory in the container
+        - action: sync
+          path: .
+          target: /app
+          # Exclude the project virtual environment
+          ignore:
+            - .venv/
+
+        # Rebuild the image on changes to the `pyproject.toml`
+        - action: rebuild
+          path: ./pyproject.toml
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+      - /app/.venv
+    env_file:
+      - ./app/.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: uv run fastapi dev --port 8000 --host=0.0.0.0
+
+  reportgenerator:
+    build:
+      context: ./reportgenerator
+      dockerfile: Dockerfile
+    volumes:
+      - ./reportgenerator/src:/app/src
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev

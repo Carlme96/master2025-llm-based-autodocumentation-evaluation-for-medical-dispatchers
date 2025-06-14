@@ -4,9 +4,6 @@ from app.utils.utils import UPLOAD_FOLDER
 from fastapi.middleware.cors import CORSMiddleware
 
 from .routers import (
-	parseBot,
-	randomstuff,
-	aicos,
 	generateReport,
 )
 from .config import load_env
@@ -41,9 +38,6 @@ app.add_middleware(
 	allow_headers=["*"],
 )
 
-app.include_router(randomstuff.router)
-app.include_router(parseBot.router)
-app.include_router(aicos.router)
 app.include_router(generateReport.router)
 
 
