@@ -1,6 +1,6 @@
-# dna-ds-master2025-llm-autodocumentation
+# master2025-llm-based-autodocumentation-evaluation-for-medical-dispatchers
 
-"LLM based Autodocumentation for Medical Debriefing" masters project.
+Repository for LLM Based Autodocumentation and Evaluation of Medical Emergency Dispatcher Conversations
 
 **Authors** \
 Carl Magnus Elvevold \
